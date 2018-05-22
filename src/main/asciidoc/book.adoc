@@ -1,0 +1,62 @@
+= REST API Documentation for a Taxi Booking Server
+
+== Book a taxi
+A POST HTTP request with an URI of "/api/book" is used to book a taxi.
+The body contains the coordinates for the source and the destination of the ride.
+
+The HTTP response is always 200 OK.
+The body of successful booking has the identifier of the taxi & the total time units for the ride.
+The body of an unsuccessful booking is empty.
+
+This is an example output for the service running at http://localhost:8080:
+
+.request
+include::{snippets}/book/http-request.adoc[]
+
+.response
+include::{snippets}/book/http-response.adoc[]
+
+.curl
+include::{snippets}/book/curl-request.adoc[]
+
+== Advance time by one unit
+A PUT HTTP request with an URI of "/api/tick" is used to advance time by one unit.
+This advances the clock for a ride by one unit.
+Some ongoing ride(s) might complete and the taxi(s) become free again and available for booking.
+When a taxi frees up, it is stationed at the destination of the ride.
+
+The HTTP response is always 200 OK.
+
+There is no body in either the request or the response.
+
+This is an example output for the service running at http://localhost:8080:
+
+.request
+include::{snippets}/tick/http-request.adoc[]
+
+.response
+include::{snippets}/tick/http-response.adoc[]
+
+.curl
+include::{snippets}/tick/curl-request.adoc[]
+
+== Reset all taxis
+A PUT HTTP request with an URI of "/api/reset" all taxis.
+That means all taxis abort their current rides, if any and become available again.
+Also, reposition themselves at the (0, 0) coordinates.
+
+The HTTP response is always 200 OK.
+
+There is no body in either the request or the response.
+
+This is an example output for the service running at http://localhost:8080:
+
+.request
+include::{snippets}/reset/http-request.adoc[]
+
+.response
+include::{snippets}/reset/http-response.adoc[]
+
+.curl
+include::{snippets}/reset/curl-request.adoc[]
+
